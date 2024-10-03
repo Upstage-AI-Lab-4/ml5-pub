@@ -22,19 +22,20 @@ def loader():
         unzip()
         
 def unzip():
-    # 현재 작업 디렉토리 경로를 가져옴
     data_dir = '../data'
     os.makedirs(data_dir, exist_ok=True)
-
     # 현재 디렉토리 내의 모든 파일을 검색
     for file_name in os.listdir(data_dir):
         # 확장자가 .zip인 파일만 처리
         if file_name.endswith('.zip'):
-            # 파일 경로 생성
+            # zip 파일 경로 생성
             zip_file_path = os.path.join(data_dir, file_name)
 
             # zip 파일을 열고 압축 해제
             with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
                 zip_ref.extractall(data_dir)
-
             print(f"'{zip_file_path}'가 '{data_dir}'로 압축 해제되었습니다.")
+
+            # 압축 해제가 완료된 후 zip 파일 삭제
+            os.remove(zip_file_path)
+            print(f"'{zip_file_path}'가 삭제되었습니다.")
