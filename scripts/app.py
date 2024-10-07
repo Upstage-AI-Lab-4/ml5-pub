@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from code.load_model import load_or_train_model
-from code.model import recommend_songs_by_knn
+from scripts.load_model import load_or_train_model
+from scripts.model import recommend_songs_by_knn
 import pandas as pd
 
 app = FastAPI()

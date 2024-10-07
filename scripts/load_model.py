@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
-from code.preprocess import preprocess, features
+from scripts.preprocess import preprocess, features
 import mlflow
 import mlflow.sklearn
 from datetime import datetime
