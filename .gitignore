@@ -2,3 +2,4 @@
 mlflow/
 mlruns/
 .vscode/
+mlartifacts/
