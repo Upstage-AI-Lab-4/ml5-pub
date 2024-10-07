@@ -9,5 +9,6 @@ def preprocess(data):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     mlflow.log_param("scaler", scaler)
+    mlflow.log_param("features", features)
 
     return X_scaled, scaler

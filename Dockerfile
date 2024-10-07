@@ -1,21 +1,15 @@
-FROM python:3.10-slim
+FROM continuumio/miniconda3
 
-# 필수 패키지 설치
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    pkg-config \
-    libhdf5-dev \
-    curl
+# MLflow 설치
+RUN pip install mlflow
 
-WORKDIR /app
-COPY ./app/requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# 디렉토리 생성 및 권한 설정
+RUN mkdir -p /mlflow/db
 
+# 환경 변수 설정
+ENV MLFLOW_TRACKING_URI=http://0.0.0.0:5000
+ENV MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow/db/mlflow.db
 
-COPY ./app /app
-
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]
-
-# pip freeze > requirements.txt
-# docker-compose build
+# 컨테이너 실행 시 MLflow 서버 실행
+ENTRYPOINT ["mlflow", "server"]
+CMD ["--host", "0.0.0.0", "--port", "5000", "--backend-store-uri", "sqlite:///mlflow/db/mlflow.db"]
