@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get install -y gcc libc-dev
 
 # Airflow, Slack Provider, pandas, scikit-learn 설치
-RUN pip install apache-airflow apache-airflow-providers-slack pandas scikit-learn
+RUN pip install apache-airflow apache-airflow-providers-slack pandas scikit-learn mlflow
 
 # Airflow 홈 디렉터리 생성 및 작업 디렉터리 설정
 RUN mkdir -p $AIRFLOW_HOME

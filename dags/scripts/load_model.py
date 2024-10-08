@@ -25,7 +25,7 @@ def load_model(model_path):
 
 def train_kmeans(X, features, current_time, kmeans_model_path):
     """KMeans 모델 학습 및 저장"""
-    mlflow.autolog()  # autolog 활성화
+    mlflow.autolog()
     with mlflow.start_run(run_name=f"kmeans_model_{current_time}", nested=True) as run:
         print(">>> Training KMeans model...")
         kmeans_model = KMeans(n_clusters=2, random_state=42)
@@ -39,7 +39,7 @@ def train_kmeans(X, features, current_time, kmeans_model_path):
 
 def train_knn(X, features, current_time, knn_model_path):
     """KNN 모델 학습 및 저장"""
-    mlflow.autolog()  # autolog 활성화
+    mlflow.autolog()
     with mlflow.start_run(run_name=f"knn_model_{current_time}", nested=True) as run:
         print(">>> Training KNN model.....")
         knn_model = NearestNeighbors(n_neighbors=30)
@@ -53,11 +53,11 @@ def train_knn(X, features, current_time, knn_model_path):
 
 def load_or_train_model():
     """모델을 로드하거나 새로 학습하는 함수"""
-    kmeans_model_path = "model/kmeans_model.pkl"
-    knn_model_path = "model/knn_model.pkl"
-    train_data_path = "data/train.csv"
+    kmeans_model_path = "/usr/local/airflow/dags/model/kmeans_model.pkl"
+    knn_model_path = "/usr/local/airflow/dags/model/knn_model.pkl"
+    train_data_path = "/usr/local/airflow/dags/data/train.csv"
 
-    mlflow.set_tracking_uri("http://127.0.0.1:5001")
+    mlflow.set_tracking_uri("http://mlflow:5000")
     mlflow.set_experiment(experiment_name='music_recommendation')
 
     # 모든 활성화된 실행 종료
@@ -77,7 +77,7 @@ def load_or_train_model():
         current_time = datetime.now().strftime("%Y%m%d-%H%M%S")
 
         # 데이터 로드 및 전처리
-        raw_data = pd.read_csv("data/spotify_songs.csv")
+        raw_data = pd.read_csv("/usr/local/airflow/dags/data/spotify_songs.csv")
         data = raw_data.dropna(subset=['track_name'])
         X, scaler = preprocess(data)
 
