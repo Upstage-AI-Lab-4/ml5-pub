@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3
+FROM python:3.10-slim
 
 # MLflow 설치
 RUN pip install mlflow

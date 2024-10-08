@@ -9,25 +9,21 @@ services:
             - "8080:8080"
         volumes:
             - ./dags:/usr/local/airflow/dags
-            - ./tmp:/tmp
+            - ./tmp:/usr/local/airflow/tmp
         environment:
             - AIRFLOW__CORE__LOAD_EXAMPLES=False
         command: >
-            bash -c "airflow db migrate && sleep 5 && airflow users create --username admin --firstname admin --lastname kisms --role Admin --email admin@gmail.com --password 123 && airflow webserver & airflow scheduler"
+            bash -c "airflow db migrate && sleep 5 && airflow users create --username admin --firstname cho --lastname sungsu --role Admin --email ski06043@gmail.com --password 1234 && airflow webserver & airflow scheduler"
 
     mlflow:
         build:
             context: .
             dockerfile: Dockerfile.mlflow
         ports:
-            - "5001:5000"
+            - "5000:5000"
         volumes:
             - ./mlflow:/mlflow
             - ./mlartifacts:/mlartifacts
         environment:
             - MLFLOW_TRACKING_URI=http://0.0.0.0:5000
             - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow/db/mlflow.db
-# docker-compose build
-# docker-compose up
-# docker-compose exec airflow bash
-# docker-compose exec mlflow bash
