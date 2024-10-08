@@ -1,17 +1,33 @@
-version: "3" # Docker Compose의 버전을 정의합니다. 버전 3은 일반적으로 많이 사용됩니다.
+version: "3"
 
-services: # 하나 이상의 컨테이너(서비스)를 정의하는 섹션
-  airflow: # 서비스 이름 (컨테이너 이름)
-    build: . # Dockerfile 위치
-    ports: # 호스트와 컨테이너 간의 포트 매핑을 정의합니다.
-      - "8080:8080" # 호스트의 8080 포트를 컨테이너의 8080 포트로 매핑합니다. Airflow 웹 UI는 8080 포트를 사용합니다.
-    volumes: # 호스트와 컨테이너 간에 공유할 파일 또는 디렉터리를 정의합니다.
-      - ./dags:/usr/local/airflow/dags # 호스트의 현재 디렉터리 내의 dags 폴더를 컨테이너의 /usr/local/airflow/dags로 마운트합니다. 이를 통해 DAG 파일을 컨테이너 내에서 사용할 수 있습니다.
-    environment: # 환경 변수를 정의합니다. 컨테이너 내에서 사용될 변수들을 설정합니다.
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False # 기본적으로 Airflow는 예제 DAGs를 로드합니다. 이를 False로 설정하여 예제 DAGs를 로드하지 않도록 합니다.
-    command: > # 컨테이너 실행 시 수행할 명령어를 정의합니다.
-      bash -c "airflow db migrate && sleep 5 && airflow users create --username admin2 --firstname inseops --lastname kisms --role Admin --email inseosp@gmail.com --password 123 && airflow webserver & airflow scheduler"
+services:
+    airflow:
+        build:
+            context: .
+            dockerfile: Dockerfile.airflow
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./tmp:/tmp
+        environment:
+            - AIRFLOW__CORE__LOAD_EXAMPLES=False
+        command: >
+            bash -c "airflow db migrate && sleep 5 && airflow users create --username admin --firstname admin --lastname kisms --role Admin --email admin@gmail.com --password 123 && airflow webserver & airflow scheduler"
 
+    mlflow:
+        build:
+            context: .
+            dockerfile: Dockerfile.mlflow
+        ports:
+            - "5001:5000"
+        volumes:
+            - ./mlflow:/mlflow
+            - ./mlartifacts:/mlartifacts
+        environment:
+            - MLFLOW_TRACKING_URI=http://0.0.0.0:5000
+            - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow/db/mlflow.db
 # docker-compose build
 # docker-compose up
 # docker-compose exec airflow bash
+# docker-compose exec mlflow bash
