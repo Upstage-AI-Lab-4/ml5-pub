@@ -75,33 +75,3 @@ class KMeans():
         
         return recommended[['track_name', 'track_artist', 'release_year', 'final_score', 'cluster']]
 
-# def recommend_songs_by_knn(song_name, knn_model, data):
-#     # song_name에 해당하는 노래의 피처를 찾아 예측에 사용
-#     song_row = data[data['track_name'] == song_name]
-    
-#     if song_row.empty:
-#         # 정확한 노래가 없을 경우, 유사한 노래 찾기
-#         song_row = find_most_similar_song(song_name, data)
-#         print(f">>> Closest match: {song_row['track_name']} by {song_row['track_artist']}")
-    
-#     # 노래의 피처 벡터 추출
-#     song_features = song_row[features].values
-#     song_features_reshaped = song_features.reshape(1, -1)
-    
-#     # KNN으로 가장 가까운 노래 30개 추천
-#     distances, indices = knn_model.kneighbors(song_features_reshaped)
-    
-#     # 디버깅 출력: 인덱스와 반환된 거리 정보 확인
-#     print(f">>> KNN distances: {distances}")
-#     print(f">>> KNN indices: {indices}")
-    
-#     # 반환된 인덱스 검증 (유효 범위 내의 인덱스만 사용)
-#     valid_indices = [i for i in indices[0] if i < len(data)]
-#     if not valid_indices:
-#         print(f">>> No valid indices found for song: {song_name}")
-#         return {"message": "No valid recommendations found."}
-    
-#     # 유효한 인덱스에 해당하는 추천 노래 반환
-#     recommended_songs = data.iloc[valid_indices]
-    
-#     return recommended_songs[['track_name', 'track_artist']].head(30)
