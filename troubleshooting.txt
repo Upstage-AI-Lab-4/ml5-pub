@@ -1,0 +1,8 @@
+# 각자 MLOps 진행하시다가 이슈가 생기거나 이슈를 해결한 트러뷸슈팅을 적어주세요. 
+
+1. 윈도우->리눅스로 OS 변경하여 진행
+참고1 : https://velog.io/@gidskql6671/WSL-WSL2-%EC%84%A4%EC%B9%98-VSCode-%EC%97%B0%EB%8F%99
+참고2 : https://junk-s.tistory.com/entry/WSL-VSCode%EC%97%90%EC%84%9C-wsl2-%EC%82%AC%EC%9A%A9%ED%95%9C-linux-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95
+
+2. 윈도우 도커 설치 시 Hyper-V BIOS 가상화 에러
+ - BIOS 모드에서 가상모드를 활성화 해주면 해결됨
