@@ -4,3 +4,4 @@ mlruns/
 .vscode/
 mlartifacts/
 .env/
+tmp/
