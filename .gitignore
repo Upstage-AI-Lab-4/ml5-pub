@@ -3,3 +3,4 @@ mlflow/
 mlruns/
 .vscode/
 mlartifacts/
+.env/

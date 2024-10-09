@@ -213,3 +213,5 @@ yarl==1.13.1
 zipp==3.20.2
 kaggle==1.6.17
 fastapi
+streamlit
+python-dotenv
