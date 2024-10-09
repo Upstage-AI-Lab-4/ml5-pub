@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from scripts.load_model import load_or_train_model
+from dags.scripts.load_model import load_or_train_model
 from scripts.model import KMeans
 import pandas as pd
 from tabulate import tabulate

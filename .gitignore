@@ -3,3 +3,5 @@ mlflow/
 mlruns/
 .vscode/
 mlartifacts/
+__pycache__/
+*.pyc

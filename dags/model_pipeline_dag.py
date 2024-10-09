@@ -1,7 +1,7 @@
 # import sys
 # import os
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime
 # 현재 파일의 경로를 기준으로 scripts 폴더 추가
 # sys.path.append(os.path.join(os.path.dirname(__file__), 'scripts'))
