@@ -6,6 +6,17 @@
 |            [주남정](https://github.com/UpstageAILab)             |            [조성수](https://github.com/UpstageAILab)             |            [권세진](https://github.com/UpstageAILab)             |            [김이준](https://github.com/UpstageAILab)             |            [김동호](https://github.com/UpstageAILab)             |
 |                            팀장, 담당 역할                             |                            담당 역할                             |                            담당 역할                             |                            담당 역할                             |                            담당 역할                             |
 
+### Task
+- [x] ipynb 파일에 mlflow 적용
+- [x] mlflow docker로 실행
+- [x] fast api 적용 후 파이썬 모듈에서 mlflow 적용
+- [x] airflow 구조 만들기
+- [x] airflow와 mlflow 도커로 실행
+- [x] streamlit 적용
+- [ ] 데이터 수집 docker-compose에 추가
+- [ ] 데이터 수집까지 포함해서 1-cycle 돌리기
+
+
 ## 0. Overview
 ### Environment
 - _Write Development environment_
@@ -90,3 +101,5 @@ e.g.
 ### Reference
 
 - _Insert related reference_
+
+
