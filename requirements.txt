@@ -15,6 +15,7 @@ apache-airflow-providers-http==4.13.1
 apache-airflow-providers-imap==3.7.0
 apache-airflow-providers-smtp==1.8.0
 apache-airflow-providers-sqlite==3.9.0
+apache-airflow-providers-docker==3.14.0
 apispec==6.6.1
 appnope==0.1.4
 argcomplete==3.5.0
@@ -215,3 +216,6 @@ kaggle==1.6.17
 fastapi
 streamlit
 python-dotenv
+uvicorn
+spotipy==2.24.0
+selenium==4.25.0
