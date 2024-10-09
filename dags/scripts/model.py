@@ -1,12 +1,20 @@
 import numpy as np
+<<<<<<< HEAD
 from scripts.preprocess import features
+=======
+from dags.scripts.preprocess import features
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
 from datetime import datetime
 
 class KMeans():
+<<<<<<< HEAD
     def init(self, song_name, model, data):
+=======
+    def __init__(self, song_name, model, data):
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
         self.song_name = song_name
         self.model = model
         self.data = data
@@ -16,6 +24,12 @@ class KMeans():
         # track_name을 소문자로 변환
         self.data['track_name_lower'] = self.data['track_name'].str.lower()
         
+<<<<<<< HEAD
+=======
+        # NaN 값 처리: NaN 값을 빈 문자열로 대체
+        self.data['track_name_lower'] = self.data['track_name_lower'].fillna('')
+
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
         # 수치형 특성 정규화
         self.data[features] = self.scaler.fit_transform(self.data[features])
         
@@ -51,7 +65,11 @@ class KMeans():
         
         current_year = datetime.now().year
         
+<<<<<<< HEAD
         self.data['year_score'] = 1 - (current_year - self.data['release_year']) / (current_year - self.data['release_year'].min())
+=======
+        # self.data['year_score'] = 1 - (current_year - self.data['release_year']) / (current_year - self.data['release_year'].min())
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
         self.data['popularity_score'] = self.data['track_popularity'] / 100
         
         content_similarity = cosine_similarity([reference_track[features]], self.data[features])
@@ -64,7 +82,11 @@ class KMeans():
         
         # 최종 점수 계산 (클러스터 점수 포함)
         self.data['final_score'] = (self.data['content_score'] * 0.4 + 
+<<<<<<< HEAD
                             self.data['year_score'] * 0.2 + 
+=======
+                            # self.data['year_score'] * 0.2 + 
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
                             self.data['popularity_score'] * 0.2 +
                             self.data['cluster_score'] * 0.2)
         
@@ -73,5 +95,10 @@ class KMeans():
         
         recommended = self.data.nlargest(top_n, 'final_score')
         
+<<<<<<< HEAD
         return recommended[['track_name', 'track_artist', 'release_year', 'final_score', 'cluster']]
 
+=======
+        # return recommended[['track_name', 'track_artist', 'release_year', 'final_score', 'cluster']]
+        return recommended[['track_name', 'track_artist', 'final_score', 'cluster']]
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f

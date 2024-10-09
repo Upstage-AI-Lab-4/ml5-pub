@@ -1,14 +1,18 @@
 FROM python:3.10-slim
 
 # 환경 변수 설정
-ENV AIRFLOW_HOME=/usr/local/airflow
+ENV AIRFLOW_HOME=/app
 
 # 시스템 업데이트 및 필요한 패키지 설치
 RUN apt-get update && \
-    apt-get install -y gcc libc-dev
-
-# Airflow, Slack Provider, pandas, scikit-learn 설치
-RUN pip install apache-airflow apache-airflow-providers-slack pandas scikit-learn
+    apt-get install -y --no-install-recommends \
+    gcc libc-dev wget unzip gnupg ca-certificates fonts-liberation \
+    libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
+    libdrm2 libexpat1 libfontconfig1 libgcc1 libglib2.0-0 libgtk-3-0 \
+    libnspr4 libnss3 libpango-1.0-0 libx11-6 libxcb1 libxcomposite1 \
+    libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 \
+    libxrender1 libxss1 libxtst6 xdg-utils chromium chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
 
 # requirements.txt 파일 복사
 COPY requirements.txt .
@@ -20,15 +24,20 @@ RUN pip install -r requirements.txt
 RUN mkdir -p $AIRFLOW_HOME
 WORKDIR $AIRFLOW_HOME
 
-# Airflow 데이터베이스 초기화 -> 로컬 db 생성
-RUN airflow db init
+# 패키지 설치
+COPY ./requirements.txt $AIRFLOW_HOME/
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # dags 폴더 복사
 COPY dags/ $AIRFLOW_HOME/dags/
 
+# entrypoint.sh 스크립트 복사
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # 포트 노출
 EXPOSE 8080
 
-# Airflow 웹 서버 및 스케줄러 실행, 그리고 관리자 계정 생성
-CMD airflow webserver -p 8080 & \
-    airflow scheduler
+# ENTRYPOINT 설정
+ENTRYPOINT ["/entrypoint.sh"]

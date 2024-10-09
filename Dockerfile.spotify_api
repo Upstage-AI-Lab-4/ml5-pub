@@ -1,0 +1,58 @@
+FROM python:3.10-slim
+
+# 필요한 패키지와 의존성 설치
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    wget \
+    unzip \
+    gnupg \
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk1.0-0 \
+    libc6 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libdrm2 \
+    libexpat1 \
+    libfontconfig1 \
+    libgcc1 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libx11-6 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    xdg-utils \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python 패키지 설치
+WORKDIR /app
+COPY ./requirements_api.txt /app/
+RUN pip install --upgrade pip
+RUN pip install -r requirements_api.txt
+
+
+COPY ./dags/ /app/dags/
+# COPY .env /app/.env
+
+# CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]
+
+# pip freeze > requirements.txt
+# docker-compose build
+# docker run -it spotify_api /bin/bash > 실행
+# docker build -t spotify_api .

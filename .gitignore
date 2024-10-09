@@ -3,4 +3,8 @@ mlflow/
 mlruns/
 .vscode/
 mlartifacts/
+<<<<<<< HEAD
+=======
+.env/
+>>>>>>> c1d4903f95677dc58b50363ed2b5ddebd6c6040f
 tmp/
