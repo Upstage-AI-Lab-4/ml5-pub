@@ -46,13 +46,14 @@ recommended_songs = []
 # 버튼을 클릭했을 때 추천 결과 가져오기
 if st.button('Recommend'):
     if song_name:
-        # FastAPI의 추천 API 호출
-        url = "http://fastapi:8000/api/v1/recommend_songs"
+        # FastAPI의 추천 API 호출 (GET 방식으로 변경)
+        url = f"http://127.0.0.1:8000/recommend?song_name={urllib.parse.quote(song_name)}"
         try:
-            response = requests.post(url, json={"song_name": song_name})
+            response = requests.get(url)
             response.raise_for_status()  # HTTPError 발생 시 처리
             
-            recommended_songs = response.json()
+            # 추천 노래 목록 파싱
+            recommended_songs = response.json().get('recommendations', [])
         except requests.exceptions.RequestException as e:
             st.error(f"Error fetching recommendations: {e}")
 
@@ -73,5 +74,3 @@ if recommended_songs:
             st.video(f"https://www.youtube.com/embed/{video_id}")
         else:
             st.write(f"No YouTube video found for {track_name} by {track_artist}")
-            
-# streamlit run streamlit_app.py

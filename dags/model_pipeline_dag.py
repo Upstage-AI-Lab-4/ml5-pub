@@ -1,19 +1,12 @@
-# import sys
-# import os
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.docker.operators.docker import DockerOperator
 from datetime import datetime
-# 현재 파일의 경로를 기준으로 scripts 폴더 추가
-# sys.path.append(os.path.join(os.path.dirname(__file__), 'scripts'))
+from scripts.train_model import train_model
 
-from scripts.load_model import load_model
-# from scripts.spotify_api import Spotify_Weekly_Chart, Get_Info
-
-
-def train_model():
+def retrain_model():
     # 모델 훈련 및 MLflow 로깅
-    pass
+    train_model()
     
 # def fetch_new_data():
 #     try:
@@ -46,7 +39,6 @@ with DAG(
     max_active_runs=1,
 ) as dag:
 
-
     t1 = DockerOperator(
         task_id='fetch_spotify_data',
         image='ml-project-mlops_5-spotify_api',  # 빌드된 도커 이미지 이름
@@ -59,7 +51,7 @@ with DAG(
     )
 
     t2 = PythonOperator(
-        task_id='train_model',
-        python_callable=train_model,
+        task_id='retrain_model',
+        python_callable=retrain_model,
     )
 t1 >> t2

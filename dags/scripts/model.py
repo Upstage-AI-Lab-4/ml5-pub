@@ -1,6 +1,5 @@
 import numpy as np
 from dags.scripts.preprocess import features
-from dags.scripts.load_model import save_model
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler

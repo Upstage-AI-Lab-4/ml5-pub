@@ -3,5 +3,5 @@ mlflow/
 mlruns/
 .vscode/
 mlartifacts/
-.env/
+.env
 tmp/
