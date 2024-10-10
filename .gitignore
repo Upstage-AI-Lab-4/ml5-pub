@@ -5,3 +5,5 @@ mlruns/
 mlartifacts/
 .env
 tmp/
+.DS_Store
+**/__pycache__/
