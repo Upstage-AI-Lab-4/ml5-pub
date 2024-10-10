@@ -16,6 +16,20 @@
 - [ ] 데이터 수집 docker-compose에 추가
 - [ ] 데이터 수집까지 포함해서 1-cycle 돌리기
 
+### Screenshot
+- #### Docker container
+![Docker container](img/mlops-20241010-docker.png)
+
+- #### Airflow
+![_Airflow_](img/mlops-20241010-airflow.png)
+
+- #### FAST API
+![_Airflow_](img/mlops-20241010-fastapi.png)
+
+- #### Streamlit
+![_Airflow_](img/mlops-20241010-streamlit.png)
+
+
 
 ## 0. Overview
 ### Environment
