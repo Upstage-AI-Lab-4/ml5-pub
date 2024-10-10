@@ -9,10 +9,11 @@ import pandas as pd
 
 # 모델 및 데이터 로드 함수
 def load_model():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
+    # base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    model_path = os.path.join(base_dir, '../model/kmeans_model.pkl')
-    data_path = os.path.join(base_dir, '../data/spotify_songs.csv')
+    model_path = os.path.join('app/dags/model/kmeans_model.pkl')
+    data_path = os.path.join('app/dags/data/spotify_songs.csv')
+    
 
     # 모델 로드
     with open(model_path, 'rb') as f:

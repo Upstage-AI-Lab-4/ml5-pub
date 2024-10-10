@@ -1,0 +1,26 @@
+[770:770:1009/162608.445942:WARNING:chrome_main_delegate.cc(747)] This is Chrome version 129.0.6668.89 (not a warning)
+[770:796:1009/162608.473666:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:799:1009/162608.474686:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:799:1009/162608.474782:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:796:1009/162608.476645:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[770:796:1009/162608.476933:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[770:796:1009/162608.477153:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[770:796:1009/162608.477188:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[770:796:1009/162608.477312:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[809:809:1009/162608.491721:WARNING:sandbox_linux.cc(430)] InitializeSandbox() called with multiple threads in process gpu-process.
+[809:809:1009/162608.492635:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[770:796:1009/162608.493290:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[770:796:1009/162608.493421:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[854:854:1009/162608.545524:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[854:854:1009/162608.545900:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[770:770:1009/162608.550455:WARNING:bluez_dbus_manager.cc(234)] Floss manager service not available, cannot set Floss enable/disable.
+[770:867:1009/162608.559064:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:867:1009/162608.559361:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:867:1009/162608.559757:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:867:1009/162608.559993:WARNING:property.cc(149)] DaemonVersion: GetAndBlock: failed.
+[770:867:1009/162608.560335:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[770:867:1009/162608.560558:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[869:869:1009/162608.597798:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[869:869:1009/162608.598085:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[878:878:1009/162608.631906:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[878:878:1009/162608.632373:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.

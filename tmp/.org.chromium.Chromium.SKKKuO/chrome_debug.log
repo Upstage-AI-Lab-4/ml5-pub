@@ -1,0 +1,43 @@
+[3650:3650:1009/161908.831070:WARNING:chrome_main_delegate.cc(747)] This is Chrome version 129.0.6668.89 (not a warning)
+[3650:3676:1009/161908.862162:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3679:1009/161908.863333:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3679:1009/161908.863409:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3676:1009/161908.865323:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3650:3676:1009/161908.865441:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3650:3676:1009/161908.865598:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3650:3676:1009/161908.865760:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3650:3676:1009/161908.865852:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3689:3689:1009/161908.881011:WARNING:sandbox_linux.cc(430)] InitializeSandbox() called with multiple threads in process gpu-process.
+[3689:3689:1009/161908.882066:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[3650:3676:1009/161908.883253:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3650:3676:1009/161908.883546:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[3734:3734:1009/161908.936685:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3734:3734:1009/161908.937257:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3650:3650:1009/161908.938254:WARNING:bluez_dbus_manager.cc(234)] Floss manager service not available, cannot set Floss enable/disable.
+[3650:3749:1009/161908.948129:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3749:1009/161908.948250:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3749:1009/161908.948577:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3749:1009/161908.948863:WARNING:property.cc(149)] DaemonVersion: GetAndBlock: failed.
+[3650:3749:1009/161908.949334:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3650:3749:1009/161908.949618:ERROR:bus.cc(407)] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[3750:3750:1009/161908.984828:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3750:3750:1009/161908.985200:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3760:3760:1009/161909.016559:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3760:3760:1009/161909.017016:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3650:3650:1009/161910.788435:INFO:CONSOLE(196)] "Unrecognized feature: 'web-share'.", source: https://www.youtube.com/s/player/8579e400/www-widgetapi.vflset/www-widgetapi.js (196)
+[3785:3785:1009/161910.796644:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3785:3785:1009/161910.796954:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3706:3729:1009/161910.923807:WARNING:spdy_session.cc(2975)] Received HEADERS for invalid stream 7
+[3706:3729:1009/161910.939469:WARNING:spdy_session.cc(2975)] Received HEADERS for invalid stream 9
+[3706:3729:1009/161910.983210:WARNING:spdy_session.cc(2975)] Received HEADERS for invalid stream 11
+[3706:3729:1009/161910.995869:WARNING:spdy_session.cc(2975)] Received HEADERS for invalid stream 13
+[3650:3650:1009/161911.823820:INFO:CONSOLE(0)] "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o", source: https://accounts.spotify.com/login?continue=https%3A%2F%2Fcharts.spotify.com/login (0)
+[3795:3795:1009/161912.297675:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3795:3795:1009/161912.297966:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3824:3824:1009/161915.038890:WARNING:runtime_features.cc(687)] AttributionReporting cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement in addition.
+[3824:3824:1009/161915.039245:WARNING:runtime_features.cc(701)] AttributionReportingCrossAppWeb cannot be enabled in this configuration. Use --enable-features=ConversionMeasurement,AttributionReportingCrossAppWeb in addition.
+[3650:3650:1009/161918.672209:INFO:CONSOLE(0)] "The resource https://encore.scdn.co/fonts/SpotifyMixUI-Regular-cc3b1de388efa4cbca6c75cebc24585e.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source: https://charts.spotify.com/charts/overview/global (0)
+[3650:3650:1009/161918.674495:INFO:CONSOLE(0)] "The resource https://encore.scdn.co/fonts/SpotifyMixUITitleVariable-8769ccfde3379b7ebcadd9529b49d0cc.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source: https://charts.spotify.com/charts/overview/global (0)
+[3650:3650:1009/161918.674819:INFO:CONSOLE(0)] "The resource https://encore.scdn.co/fonts/SpotifyMixUITitle-Extrabold-ba6c73cd7f82c81e49cf2204017803ed.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source: https://charts.spotify.com/charts/overview/global (0)
+[3650:3650:1009/161918.675260:INFO:CONSOLE(0)] "The resource https://encore.scdn.co/fonts/SpotifyMixUI-Bold-4264b799009b1db5c491778b1bc8e5b7.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source: https://charts.spotify.com/charts/overview/global (0)
+[3650:3650:1009/161918.675522:INFO:CONSOLE(0)] "The resource https://encore.scdn.co/fonts/SpotifyMixUITitle-Bold-37290f1de77f297fcc26d71e9afcf43f.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source: https://charts.spotify.com/charts/overview/global (0)

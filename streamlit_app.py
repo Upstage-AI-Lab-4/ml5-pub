@@ -47,7 +47,7 @@ recommended_songs = []
 if st.button('Recommend'):
     if song_name:
         # FastAPI의 추천 API 호출
-        url = "http://localhost:8000/api/v1/recommend_songs"
+        url = "http://fastapi:8000/api/v1/recommend_songs"
         try:
             response = requests.post(url, json={"song_name": song_name})
             response.raise_for_status()  # HTTPError 발생 시 처리
