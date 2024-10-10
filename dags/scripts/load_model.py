@@ -25,11 +25,11 @@ def load_model():
     return kmeans_model, data
 
 
-# def save_model(model, model_path):
-#     """모델을 파일로 저장하는 함수"""
-#     with open(model_path, 'wb') as f:
-#         pickle.dump(model, f)
-#     print(f">>> Model saved at {model_path}")
+def save_model(model, model_path):
+    """모델을 파일로 저장하는 함수"""
+    with open(model_path, 'wb') as f:
+        pickle.dump(model, f)
+    print(f">>> Model saved at {model_path}")
 
 
 # def load_model(model_path):
