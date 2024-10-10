@@ -3,19 +3,29 @@ import mlflow.sklearn
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 from datetime import datetime
+import numpy as np
+import pytz
+
+# 한국 시간대 설정
+KST = pytz.timezone('Asia/Seoul')
 
 features = ['danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo', 'duration_ms']
 
 mlflow.set_tracking_uri("http://mlflow:5000")
 mlflow.set_experiment(experiment_name = "music_recommendation")
-mlflow.sklearn.autolog()
 
 # 데이터 전처리 및 스케일링 함수
 def preprocess_data(data, model):
-    current_time = datetime.now().strftime("%Y%m%d-%H%M%S")
-    run_name = f"kmeans_{current_time}"
-    
-    with mlflow.start_run(run_name=run_name):
+    mlflow.sklearn.autolog()   
+    with mlflow.start_run(run_name=f"kmeans_{datetime.now(KST).strftime('%Y-%m-%d_%H-%M-%S')}"):
+
+        mlflow.log_params({
+            "model_type": "KMeans",
+            "n_clusters": model.n_clusters,
+            "init": model.init,
+            "max_iter": model.max_iter,
+            "random_state": model.random_state
+        })        
         data['duration_minutes'] = data['duration_ms'] // 60000  # 분
         data['duration_seconds'] = (data['duration_ms'] % 60000) // 1000  # 초
 
@@ -51,5 +61,15 @@ def preprocess_data(data, model):
         if 'cluster' not in data.columns:
             # K-means 클러스터링
             data['cluster'] = model.predict(data[features])
-        
+
+        mlflow.log_metric("number_of_rows", len(data))
+        mlflow.log_metric("number_of_features", len(features))
+        mlflow.log_metric("number_of_clusters", model.n_clusters)
+
+         # KMeans 모델의 각 클러스터 중심 좌표 로깅
+        for i, center in enumerate(model.cluster_centers_):
+            mlflow.log_metric(f"cluster_{i}_center", np.linalg.norm(center))
+
+        # mlflow.sklearn.log_model(model, "model")
+
     return data, model
