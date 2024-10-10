@@ -7,17 +7,6 @@ services:
         ports:
             - "8080:8080"
         volumes:
-            # 성수님 버전
-            - ./dags:/usr/local/airflow/dags
-            - ./tmp:/usr/local/airflow/tmp
-            # 세진님 버전 
-            - ./dags:/app/dags
-            - ./tmp:/tmp
-            - /var/run/docker.sock:/var/run/docker.sock 
-            # 이준님 버전
-            - ./dags:/usr/local/airflow/dags
-            - ./tmp:/tmp
-            # 동호님 버전
             - ./dags:/usr/local/airflow/dags
             - ./tmp:/tmp
         environment:
@@ -34,19 +23,8 @@ services:
         ports:
             - "5000:5000"
         volumes:
-            # 성수님 버전
-            - ./mlflow:/mlflow
-            - ./mlartifacts:/mlartifacts
-            # 이준님 버전
             - ./mlflow:/mlflow
             - ./mlartifacts:/mlartifacts       
-            # 세진님 버전
-            - ./dags/data:/app/data
-            - ./mlflow:/app/mlflow
-            - ./mlartifacts:/app/mlartifacts
-            # 동호님 버전
-            - ./mlflow:/mlflow
-            - ./mlartifacts:/mlartifacts
         environment:
             - MLFLOW_TRACKING_URI=http://0.0.0.0:5000
             - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow/db/mlflow.db
@@ -58,15 +36,15 @@ services:
 
     spotify_api:
         build:
-        context: .
-        dockerfile: Dockerfile.spotify_api
+          context: .
+          dockerfile: Dockerfile.spotify_api
         container_name: spotify_api
         volumes:
             - ./dags/data:/app/dags/data
         environment:
-            - SPOTIFY_CLIENT_ID=your_spotify_client_id
-            - SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-            - SPOTIFY_REDIRECT_URI=http://localhost:8000/callback
+          - SPOTIFY_CLIENT_ID=50c56657aabf40399a6bc9fc664efc82
+          - SPOTIFY_CLIENT_SECRET=6570994a38604701a26074800c9b6045
+          - SPOTIFY_REDIRECT_URI=http://localhost:8000/callback
         command: >
                  /bin/bash -c "while true; do sleep 1; done"
         networks:
@@ -74,16 +52,16 @@ services:
 
     fastapi:
         build:
-        context: .
-        dockerfile: Dockerfile.fastapi
+          context: .
+          dockerfile: Dockerfile.fastapi
         container_name: fastapi
         ports:
             - "8000:8000"
         volumes:
             - ./dags:/app/dags
         environment:
-        - SPOTIFY_CLIENT_ID=your_spotify_client_id  # 나중에 성수님이 필요하신 환경변수/값으로 셋팅하심 됩니다
-        - SPOTIFY_CLIENT_SECRET=your_spotify_client_secret # 나중에 성수님이 필요하신 환경변수/값으로 셋팅하심 됩니다
+          - SPOTIFY_CLIENT_ID=50c56657aabf40399a6bc9fc664efc82
+          - SPOTIFY_CLIENT_SECRET=6570994a38604701a26074800c9b6045
 
         command: >
                 uvicorn app:app --host 0.0.0.0 --port 8000
@@ -92,16 +70,13 @@ services:
 
     streamlit:
         build:
-        context: .
-        dockerfile: Dockerfile.streamlit
+          context: .
+          dockerfile: Dockerfile.streamlit
         container_name: streamlit
         ports:
             - "8501:8501"
         volumes:
             - ./dags:/app/dags
-        environment:
-            - API_URL=http://fastapi:8000   # 나중에 성수님이 필요하신 환경변수/값으로 셋팅하심 됩니다
-            - STREAMLIT_SECRET_KEY=your_secret_key  # 나중에 성수님이 필요하신 환경변수/값으로 셋팅하심 됩니다
         depends_on:
             - fastapi
         command: >
@@ -109,9 +84,9 @@ services:
         networks:
             - app_network
 
-    networks:
-    app_network:
-        driver: bridge
+networks:
+  app_network:
+    driver: bridge
 
 # docker-compose build
 # docker-compose up

@@ -1,60 +1,39 @@
-from fastapi import FastAPI, HTTPException
-from dags.scripts.load_model import load_or_train_model
-from dags.scripts.SongInput import SongInput
+from fastapi import FastAPI, Query
+from fastapi.responses import JSONResponse
+from dags.scripts.SongResponse import RecommendationItem, RecommendationResponse
 from dags.scripts.model import KMeans
-from dags.scripts.load_model import load_model
-import pandas as pd
-from tabulate import tabulate
-# from dags.scripts.load_model import load_or_train_model
-from dags.scripts.model import KMeans
-import pandas as pd
-import sklearn
-import pickle
+from dags.scripts.load_model_data import load_kmeans_model, load_data
 
 app = FastAPI()
 
 # 글로벌 모델과 스케일러 로드
-kmeans_model, data = load_or_train_model()
-kmeans_model_path = "/app/dags/model/kmeans_model.pkl"
-knn_model_path = "/app/dags/model/knn_model.pkl"
-train_data_path = "/app/dags/data/train.csv"
+kmeans_model_path = "./dags/model/kmeans_model.pkl"
+train_data_path = "./dags/data/train.csv"
+backup_data_path = "./dags/data/spotify_songs.csv"  # 백업 경로 추가
 
-with open(knn_model_path, 'rb') as file:
-    knn_model = pickle.load(file)
-data = pd.read_csv(train_data_path)
+# Load model and data
+kmeans_model = load_kmeans_model(kmeans_model_path)
+data = load_data(train_data_path, backup_data_path)
 
-@app.post("/recommend")
-def recommend_songs(song_name: str):
+@app.get("/recommend", response_model=RecommendationResponse)
+def recommend_songs(song_name: str = Query(..., description="Enter the song name to get recommendations")):
     if not song_name.strip():
-        return {"error": "Song name cannot be empty."}
+        return JSONResponse(content={"error": "Song name cannot be empty."}, status_code=400)
     
     # 추천 실행
-    kmeans_setting = KMeans(song_name, kmeans_model, data)
-    recommended_songs = kmeans_setting.recommend_songs_by_knn(top_n=10)
-    recommend = KMeans(song_name, knn_model, data)
+    recommend = KMeans(song_name, kmeans_model, data)
     recommended_songs = recommend.recommend_songs_by_knn()
 
     if recommended_songs is not None:
-        print("Recommended tracks:")
-        print(tabulate(recommended_songs, 
-                    headers=['track_name', 'artist_name', 'release_year', 'final_score', 'cluster'],
-                    tablefmt='psql', showindex=False))
-
-
-
-kmeans_model, data = load_model()
-
-@app.post("/api/v1/recommend_songs")
-def recommend_songs(input: SongInput):
-    song_name = input.song_name
-
-    # KMeans 추천 시스템 인스턴스 생성
-    recommender = KMeans(song_name, kmeans_model, data)
-
-    try:
-        # 추천된 노래 목록 반환
-        recommendations = recommender.recommend_songs_by_knn(top_n=10)
-        return recommendations.to_dict(orient='records')
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error in recommendation: {str(e)}")
-
+        recommendations = [
+            RecommendationItem(
+                track_name=str(row['track_name']),
+                track_artist=str(row['track_artist']),
+                release_year=int(row['release_year']),
+                final_score=float(row['final_score'])
+            )
+            for row in recommended_songs  # 리스트이므로 iterrows()가 필요 없음
+        ]
+        return RecommendationResponse(recommendations=recommendations)
+    else:
+        return JSONResponse(content={"error": "No recommendations found"}, status_code=404)

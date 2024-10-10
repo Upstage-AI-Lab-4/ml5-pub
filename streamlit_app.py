@@ -10,6 +10,7 @@ load_dotenv()
 # YouTube API 설정 (API 키를 .env 파일에서 가져오기)
 YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 
+
 # YouTube 검색 함수
 def get_youtube_video_id(song_name, artist_name):
     search_query = f"{song_name} {artist_name} official"
@@ -46,13 +47,15 @@ recommended_songs = []
 # 버튼을 클릭했을 때 추천 결과 가져오기
 if st.button('Recommend'):
     if song_name:
-        # FastAPI의 추천 API 호출
-        url = "http://fastapi:8000/api/v1/recommend_songs"
+        url = f"http://fastapi:8000/recommend?song_name={urllib.parse.quote(song_name)}"
+        
         try:
-            response = requests.post(url, json={"song_name": song_name})
+            # response = requests.get(url, json={"song_name": song_name})
+            response = requests.get(url)
             response.raise_for_status()  # HTTPError 발생 시 처리
             
-            recommended_songs = response.json()
+            # 추천 노래 목록 파싱
+            recommended_songs = response.json().get('recommendations', [])
         except requests.exceptions.RequestException as e:
             st.error(f"Error fetching recommendations: {e}")
 

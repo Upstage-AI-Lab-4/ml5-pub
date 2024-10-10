@@ -219,3 +219,4 @@ fastapi==0.115.0
 uvicorn==0.31.0
 spotipy==2.24.0
 selenium==4.25.0
+apache-airflow-providers-docker==3.14.0

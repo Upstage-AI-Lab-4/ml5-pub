@@ -1,4 +1,21 @@
-# 데이터셋 가져와서 모델 학습하는 코드
-# 이 코드 내에서 사용되는 경로는 docker 경로로 작성해야함.
-# 이 파일에서 학습 완료된 모델과 학습할때 사용된 데이터셋을 각각 model, data 폴더에 저장하는것까지 해야함 (track name 결측치면 공백으로 바꿨거나 뭐 이런 전처리 있을때 그렇게 전부 결측치 처리한 df를 다시 train.csv로 저장바람.. 나중에 모델 불러올때 모델이 학습한 데이터셋과 동일한 데이터셋이 필요하기 때문ㅇ..)
-# 여기서 데이터 전처리를 분리할거면 prepocess.py 에 작성해도 좋을것같습니다..
+import pickle
+from sklearn.preprocessing import StandardScaler
+from scripts.preprocess import preprocess_data
+from scripts.load_model_data import load_kmeans_model, load_data
+
+def train_model():
+    kmeans_model_path = "/app/dags/model/kmeans_model.pkl"
+    train_data_path = "/app/dags/data/train.csv"
+    backup_data_path = "/app/dags/data/spotify_songs.csv"
+    
+    kmeans_model = load_kmeans_model(kmeans_model_path)
+    data = load_data(train_data_path, backup_data_path)
+
+    preprocess_data(data, kmeans_model)
+
+    # CSV로 저장
+    data.to_csv(train_data_path, index=False)
+    # 모델 저장
+    with open(kmeans_model_path, 'wb') as f:
+        pickle.dump(kmeans_model, f)
+    print(f">>> Model saved at {kmeans_model_path}")

@@ -17,5 +17,7 @@ RUN pip install --upgrade pip && \
 # streamlit 코드와 모델 관련 파일 복사
 COPY ./dags /app/dags/
 COPY ./streamlit_app.py /app/
+# .env 파일 복사
+COPY ./.env /app/
 
 CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
