@@ -1,5 +1,7 @@
 import numpy as np
 from dags.scripts.preprocess import features
+from scripts.preprocess import features
+from dags.scripts.preprocess import features
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
@@ -53,8 +55,12 @@ class KMeans():
         reference_track = self.data.iloc[most_similar_idx]
         
         current_year = datetime.now().year
-        
+
+        ### 주석처리 버전과 처리하지 않은 버전이 둘 다 존재함         
         # self.data['year_score'] = 1 - (current_year - self.data['release_year']) / (current_year - self.data['release_year'].min())
+        self.data['year_score'] = 1 - (current_year - self.data['release_year']) / (current_year - self.data['release_year'].min())
+        ### 주석처리 버전과 처리하지 않은 버전이 둘 다 존재함         
+        
         self.data['popularity_score'] = self.data['track_popularity'] / 100
         
         content_similarity = cosine_similarity([reference_track[features]], self.data[features])
@@ -67,6 +73,8 @@ class KMeans():
         
         # 최종 점수 계산 (클러스터 점수 포함)
         self.data['final_score'] = (self.data['content_score'] * 0.4 + 
+                            # self.data['year_score'] * 0.2 +           ### 주석처리 버전과 처리하지 않은 버전이 둘 다 존재함 
+                            self.data['year_score'] * 0.2 +             ### 주석처리 버전과 처리하지 않은 버전이 둘 다 존재함 
                             # self.data['year_score'] * 0.2 + 
                             self.data['popularity_score'] * 0.2 +
                             self.data['cluster_score'] * 0.2)
