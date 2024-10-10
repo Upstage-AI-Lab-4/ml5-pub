@@ -8,21 +8,6 @@ def retrain_model():
     # 모델 훈련 및 MLflow 로깅
     train_model()
     
-# def fetch_new_data():
-#     try:
-#         countries = ['kr', 'us', 'global']
-#         downloader = Spotify_Weekly_Chart(countries)
-#         downloader.download_charts('sejin_kwon@naver.com', 'qykfab-5reZqu-pafhug')
-
-#         spotify_api = Get_Info()
-#         spotify_api.fetch()
-    
-#     except Exception as e:
-#         print(f"Error in fetch_new_data: {e}, Probably no new songs updated in the chart")
-#         raise
-
-
-
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -54,4 +39,5 @@ with DAG(
         task_id='retrain_model',
         python_callable=retrain_model,
     )
+    
 t1 >> t2

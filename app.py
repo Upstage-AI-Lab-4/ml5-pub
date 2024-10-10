@@ -2,9 +2,7 @@ from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 from dags.scripts.SongResponse import RecommendationItem, RecommendationResponse
 from dags.scripts.model import KMeans
-import pandas as pd
-import os
-import pickle
+from dags.scripts.load_model_data import load_kmeans_model, load_data
 
 app = FastAPI()
 
@@ -13,16 +11,9 @@ kmeans_model_path = "./dags/model/kmeans_model.pkl"
 train_data_path = "./dags/data/train.csv"
 backup_data_path = "./dags/data/spotify_songs.csv"  # 백업 경로 추가
 
-# KMeans 모델 로드
-with open(kmeans_model_path, 'rb') as file:
-    knn_model = pickle.load(file)
-
-# 데이터 경로 확인 및 데이터 로드
-if os.path.exists(train_data_path):
-    data = pd.read_csv(train_data_path)
-else:
-    print(f"{train_data_path} not found. Loading from {backup_data_path}")
-    data = pd.read_csv(backup_data_path)
+# Load model and data
+kmeans_model = load_kmeans_model(kmeans_model_path)
+data = load_data(train_data_path, backup_data_path)
 
 @app.get("/recommend", response_model=RecommendationResponse)
 def recommend_songs(song_name: str = Query(..., description="Enter the song name to get recommendations")):
@@ -30,7 +21,7 @@ def recommend_songs(song_name: str = Query(..., description="Enter the song name
         return JSONResponse(content={"error": "Song name cannot be empty."}, status_code=400)
     
     # 추천 실행
-    recommend = KMeans(song_name, knn_model, data)
+    recommend = KMeans(song_name, kmeans_model, data)
     recommended_songs = recommend.recommend_songs_by_knn()
 
     if recommended_songs is not None:
