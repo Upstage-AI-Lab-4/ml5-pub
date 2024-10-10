@@ -50,3 +50,4 @@ def recommend_songs(song_name: str):
         return RecommendationResponse(recommendations=recommendations)
     else:
         return JSONResponse(content={"error": "No recommendations found"}, status_code=404)
+    
