@@ -9,6 +9,7 @@ services:
         volumes:
             - ./dags:/usr/local/airflow/dags
             - ./tmp:/tmp
+            - /var/run/docker.sock:/var/run/docker.sock
         environment:
             - AIRFLOW__CORE__LOAD_EXAMPLES=False
         networks:
