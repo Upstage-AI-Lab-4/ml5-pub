@@ -1,5 +1,8 @@
 FROM python:3.10-slim
 
+# 환경 변수 설정
+ENV Spotify_HOME=/app
+
 # 필요한 패키지와 의존성 설치
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -40,14 +43,15 @@ RUN apt-get update && \
     chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
-# Python 패키지 설치
-WORKDIR /app
-COPY ./requirements_api.txt /app/
+# 작업 디렉토리 설정
+WORKDIR $Spotify_HOME
+
+COPY ./requirements_api.txt $Spotify_HOME/
 RUN pip install --upgrade pip
 RUN pip install -r requirements_api.txt
 
 
-COPY ./dags/ /app/dags/
+COPY ./dags/ $Spotify_HOME/dags/
 # COPY .env /app/.env
 
 # CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]

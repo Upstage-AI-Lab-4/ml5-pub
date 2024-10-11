@@ -1,7 +1,10 @@
 .venv/
 mlflow/
 mlruns/
+airflow/
 .vscode/
 mlartifacts/
-.env/
+.env
 tmp/
+.DS_Store
+**/__pycache__/

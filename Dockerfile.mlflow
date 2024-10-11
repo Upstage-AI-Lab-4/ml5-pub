@@ -4,7 +4,7 @@ FROM continuumio/miniconda3
 RUN pip install mlflow
 
 # 디렉토리 생성 및 권한 설정
-RUN mkdir -p /mlflow/db
+RUN mkdir -p ./mlflow/db
 
 # 환경 변수 설정
 # ENV MLFLOW_TRACKING_URI=http://0.0.0.0:5000

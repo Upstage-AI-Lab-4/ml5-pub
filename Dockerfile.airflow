@@ -3,6 +3,15 @@ FROM python:3.10-slim
 # 환경 변수 설정
 ENV AIRFLOW_HOME=/app
 
+WORKDIR $AIRFLOW_HOME
+
+# DB 디렉터리 생성 및 권한 설정
+RUN mkdir -p $AIRFLOW_HOME/db && \
+    chmod -R 777 $AIRFLOW_HOME/db
+
+COPY ./requirements.txt $AIRFLOW_HOME/
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
 # 시스템 업데이트 및 필요한 패키지 설치
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -14,24 +23,14 @@ RUN apt-get update && \
     libxrender1 libxss1 libxtst6 xdg-utils chromium chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
-# Airflow 홈 디렉터리 생성 및 작업 디렉터리 설정
-RUN mkdir -p $AIRFLOW_HOME
-WORKDIR $AIRFLOW_HOME
-
-# 패키지 설치
-COPY ./requirements.txt $AIRFLOW_HOME/
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
 # dags 폴더 복사
 COPY dags/ $AIRFLOW_HOME/dags/
 
-# entrypoint.sh 스크립트 복사
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# 데이터베이스 초기화 및 마이그레이션
+RUN airflow db init
+
+RUN airflow db migrate && \
+    airflow connections create-default-connections
 
 # 포트 노출
 EXPOSE 8080
-
-# ENTRYPOINT 설정
-ENTRYPOINT ["/entrypoint.sh"]
